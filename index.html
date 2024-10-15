@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objects</title>
+  </head>
+  <body>
+    <h1><center><u> Objects </u></center></h1>
+     
+
+    <h1>Question:03</h1>
+
+    <h1>Records</h1>
+    <ul id="recordList"></ul>
+
+    
+    <h1>Question:04</h1>
+    <h2>Enter Population Details</h2>
+
+    <form id="populationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required /><br /><br />
+
+      <label>Gender:</label>
+      <input type="radio" id="male" name="gender" value="Male" required /> Male
+      <input type="radio" id="female" name="gender" value="Female" required />
+      Female<br /><br />
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" required /><br /><br />
+
+      <label for="education">Education:</label>
+      <select id="education" required>
+        <option value="High School">High School</option>
+        <option value="Bachelor's">Bachelor's</option>
+        <option value="Master's">Master's</option>
+        <option value="PhD">PhD</option></select
+      ><br /><br />
+
+      <label for="profession">Profession:</label>
+      <select id="profession" required>
+        <option value="Doctor">Doctor</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Teacher">Teacher</option>
+        <option value="Other">Other</option></select
+      ><br /><br />
+
+      <button type="submit">Save Record</button>
+    </form>
+
+    <h3>Saved Records:</h3>
+    <ul id="recordList"></ul>
+
+
+
+    <script>
+                 ////...question:01...////
+                document.write("<h1>Question:01</h1>");
+                ///1. Suppose You have an array of object
+            //var itemsArray = [
+            //{name:”juice”,price:”50”, quantity:”3”},
+            //{name:”cookie”,price:”30”, quantity:”9”},
+            //{name:”shirt”,price:”880”, quantity:”1”},
+            //{name:”pen”,price:”100”, quantity:”2”}];
+            //Calculate total price of each item and all items;
+
+            // Define the array of items
+            const itemsArray = [
+              {name: "juice", price: "50", quantity: "3"},
+              {name: "cookie", price: "30", quantity: "9"},
+              {name: "shirt", price: "880", quantity: "1"},
+              {name: "pen", price: "100", quantity: "2"}
+            ];
+
+            // Calculate total price for each item and store in a new array
+            const itemTotals = itemsArray.map(item => {
+              const totalPrice = parseFloat(item.price) * parseFloat(item.quantity);
+              return {
+                name: item.name,
+                totalPrice: totalPrice
+              };
+            });
+
+            // Calculate the grand total of all items
+            const grandTotal = itemTotals.reduce((sum, item) => sum + item.totalPrice, 0);
+
+            // Log the results
+            document.write("Total price for each item:");
+            itemTotals.forEach(item => {
+              document.write(`${item.name}: $${item.totalPrice.toFixed(2)}`);
+            });
+            document.write("<br>");
+            document.write(`\nGrand total of all items: $${grandTotal.toFixed(2)}`);
+
+            ////...question:02...////
+            //2. Create an object with properties name, email, password, age,
+            //gender, city, country.
+            //Check if age and country properties exist in object or not.
+            //Also check firstName and lastName properties in object.
+
+            // Create an object with the specified properties
+            // Create the object with specified properties
+             // Create an object with the specified properties
+      let user = {
+          name: "John Doe",
+          email: "johndoe@example.com",
+          password: "password123",
+          age: 25,
+          gender: "Male",
+          city: "New York",
+          country: "USA"
+        };
+
+        // Check if 'age' and 'country' properties exist
+        console.log('age' in user);        // true
+        console.log('country' in user);    // true
+
+        // Check if 'firstName' and 'lastName' properties exist
+        console.log('firstName' in user);  // false
+        console.log('lastName' in user);   // false
+
+        // Alternatively, you can use hasOwnProperty() method
+        console.log(user.hasOwnProperty('age'));       // true
+        console.log(user.hasOwnProperty('country'));   // true
+        console.log(user.hasOwnProperty('firstName')); // false
+        console.log(user.hasOwnProperty('lastName'));  // false
+
+
+
+
+
+            ////...question:03...////
+            //3. Create a constructor function with some properties. Now  create multiple records using the constructor.
+
+            function User(name, email, age, gender, city, country) {
+                        this.name = name;
+                        this.email = email;
+                        this.age = age;
+                        this.gender = gender;
+                        this.city = city;
+                        this.country = country;
+                    }
+
+                    var user1 = new User("Sara", "sara1@gmail.com", 21, "Female", "Karachi", "Pakistan");
+                    var user2 = new User("Sobia", "sobia2@gmail.com", 23, "Female", "Karachi", "Pakistan");
+                    var user3 = new User("Fatima", "fatima3@gmail.com", 23, "Female", "Karachi", "Pakistan");
+
+                    let records = [user1, user2, user3]
+                    // Display records in the browser
+function displayRecords() {
+    let recordList = document.getElementById('recordList');
+    recordList.innerHTML = '';
+
+    records.forEach((record, index) => {
+        let listItem = document.createElement('li');
+        listItem.textContent = `${record.name}, ${record.gender}, ${record.address}, ${record.education}, ${record.profession}`;
+        recordList.appendChild(listItem);
+    });
+}
+
+// Call the displayRecords function
+displayRecords();
+
+            ////...question:04...////
+            //4. Suppose you want to check population of your area, their  educations and professions.
+            //Create a constructor function which holds following  properties:
+            //Name, gender, address, education, profession,
+            //Enter all records one by one.
+            //Hint:
+            // use select box for education and profession,
+            // use radio box for gender
+            //Bonus :  use can use localStorage to save records.
+            // Define a constructor function for Person
+            // Constructor function for population records
+            function Person(name, gender, address, education, profession) {
+                this.name = name;
+                this.gender = gender;
+                this.address = address;
+                this.education = education;
+                this.profession = profession;
+            }
+
+            // Function to get form data and create a record
+            function saveRecord(event) {
+                event.preventDefault();
+
+                let name = document.getElementById('name').value;
+                let gender = document.querySelector('input[name="gender"]:checked').value;
+                let address = document.getElementById('address').value;
+                let education = document.getElementById('education').value;
+                let profession = document.getElementById('profession').value;
+
+                let person = new Person(name, gender, address, education, profession);
+                storeRecord(person);
+                displayRecords();
+            }
+
+            // Store record in localStorage
+            function storeRecord(person) {
+                let records = JSON.parse(localStorage.getItem('populationRecords')) || [];
+                records.push(person);
+                localStorage.setItem('populationRecords', JSON.stringify(records));
+            }
+
+            // Display all records from localStorage
+            function displayRecords() {
+                let recordList = document.getElementById('recordList');
+                recordList.innerHTML = '';
+
+                let records = JSON.parse(localStorage.getItem('populationRecords')) || [];
+                records.forEach((record, index) => {
+                    let listItem = document.createElement('li');
+                    listItem.textContent = `${record.name}, ${record.gender}, ${record.address}, ${record.education}, ${record.profession}`;
+                    recordList.appendChild(listItem);
+                });
+            }
+
+            // Event listener for form submission
+            document.getElementById('populationForm').addEventListener('submit', saveRecord);
+
+            // Display records when the page loads
+            window.onload = displayRecords;
+    </script>
+  </body>
+</html>
